@@ -1,7 +1,7 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 #left {
-    background-color: #FF0000;
+    background-color: #111;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -18,4 +18,8 @@
     right: 0;
     height: 100%;
     overflow-y: auto;
+}
+
+.contact .card {
+    background-color: #333;
 }
