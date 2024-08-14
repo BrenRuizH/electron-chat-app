@@ -113,7 +113,8 @@
                 </li> -->
             </ul>
         </div>
-        <div class="col-8 chats" id="right">
+        <div class="col-8" id="right">
+            <div class="chats"></div>
         <!-- <div class="d-flex chat">
                 <div class="w-25 d-flex align-items-end justify-content-end">
                     <img class="rounded-pill me-3 avatar" width="60" src="https://randomuser.me/api/portraits/men/81.jpg">
@@ -164,7 +165,11 @@
     <script>
         const { ipcRenderer } = require('electron');
 
-        ipcRenderer.send('pp-init');
+        //ipcRenderer.send('pp-init');
+
+        /* function sendMsg() {
+            ipcRenderer.send('data-from-web', 'data from web');
+        } */
 
         ipcRenderer.on('pr-chats', (event, chats) => {
             createChats(chats);
@@ -176,16 +181,12 @@
             console.log(contacts);
         });
 
-        function sendMsg() {
-            ipcRenderer.send('data-from-web', 'data from web');
-        }
-
         function createContacts (contacts) {
             
             var lis = '';
-            contacts.forEach((c) => {
+            contacts.forEach((c, index) => {
                 lis += `
-                    <li class="p-2 card mt-2">
+                    <li class="p-2 card mt-2" onclick='changeContact(${index})'>
                         <div class="card-body">
                             <div class="d-flex">
                                 <div>
@@ -216,31 +217,50 @@
             document.querySelector('.contact').innerHTML = lis;
         }
 
-
         function createChats (chats) {
            
             var lis = '';
-            chats.forEach((c) => {
+
+            if(chats.length == 0)
                 lis += `
                     <div class="d-flex chat">
                         <div class="w-75">
                             <div class="card bg-dark">
                                 <div class="card-body text-light">
-                                    ${c.chat.message}
+                                    <h3 class="text-center">
+                                        NO MESSAGE
+                                    </h3>
                                 </div>
                             </div>
-                            <p class="small text-muted float-end">
-                                ${c.chat.date}
-                            </p>
-                        </div>
-                        <div class="w-25 d-flex align-items-end">
-                            <img class="rounded-pill ms-3 avatar" src="${c.user.image}">
                         </div>
                     </div>
                 `
-            });
+            else 
+                chats.forEach((c) => {
+                    lis += `
+                        <div class="d-flex chat">
+                            <div class="w-75">
+                                <div class="card bg-dark">
+                                    <div class="card-body text-light">
+                                        ${c.chat.message}
+                                    </div>
+                                </div>
+                                <p class="small text-muted float-end">
+                                    ${c.chat.date}
+                                </p>
+                            </div>
+                            <div class="w-25 d-flex align-items-end">
+                                <img class="rounded-pill ms-3 avatar" src="${c.user.image}">
+                            </div>
+                        </div>
+                    `
+                });
 
             document.querySelector('.chats').innerHTML = lis;
+        }
+
+        function changeContact(index) {
+            ipcRenderer.send('pp-get-chat', index);
         }
     </script>
 </body>
