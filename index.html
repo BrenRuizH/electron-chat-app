@@ -9,6 +9,7 @@
 <body>
     <div class="row">
         <div class="col-4" id="left">
+            <button onclick="sendMsg()"> Click</button>
             <ul class="contact list-unstyled mb-0 mt-2">
                 <!-- <li class="p-2 card mt-2">
                     <div class="card-body">
@@ -158,6 +159,7 @@
                 </div>
             </form>
         </div>
+        
     </div>
 
     <script>
@@ -167,6 +169,11 @@
             alert("Message from server");
             console.log(arg);
         });
+
+
+        function sendMsg() {
+            ipcRenderer.send('data-from-web', 'data from web');
+        }
 
         function createContacts () {
             var contacts = [

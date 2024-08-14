@@ -16,6 +16,10 @@ function createWindow() {
         console.log('did-finish-load');
         win.webContents.send('data-from-server', { 'key':'value' });
     });
+
+    ipcMain.on('data-from-web', (event, data) => {
+        console.log("msg from web", data);
+    });
 }
 
 app.whenReady().then(createWindow);
