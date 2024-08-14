@@ -161,7 +161,13 @@
     </div>
 
     <script>
-        const { app, BrowserWindow } = require('electron');
+        const { ipcRenderer } = require('electron');
+
+        ipcRenderer.on('data-from-server', (event, arg) => {
+            alert("Message from server");
+            console.log(arg);
+        });
+
         function createContacts () {
             var contacts = [
                 {

@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 function createWindow() {
     let win = new BrowserWindow({
@@ -11,6 +11,11 @@ function createWindow() {
     });
 
     win.loadFile("index.html");
+
+    win.webContents.on('did-finish-load', () => {
+        console.log('did-finish-load');
+        win.webContents.send('data-from-server', { 'key':'value' });
+    });
 }
 
 app.whenReady().then(createWindow);
