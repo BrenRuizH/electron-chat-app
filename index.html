@@ -164,6 +164,8 @@
     <script>
         const { ipcRenderer } = require('electron');
 
+        ipcRenderer.send('pp-init');
+
         ipcRenderer.on('pr-chats', (event, chats) => {
             createChats(chats);
             console.log(chats);
@@ -173,7 +175,6 @@
             createContacts(contacts);
             console.log(contacts);
         });
-
 
         function sendMsg() {
             ipcRenderer.send('data-from-web', 'data from web');

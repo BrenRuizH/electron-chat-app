@@ -18,12 +18,19 @@ function createWindow() {
         //console.log('did-finish-load');
         //win.webContents.send('data-from-server', { 'key':'value' });
         //win.webContents.send('pr-init', [chats, contacts]);
-        win.webContents.send('pr-chats', chats);
-        win.webContents.send('pr-contacts', contacts);
+        //win.webContents.send('pr-chats', chats);
+        //win.webContents.send('pr-contacts', contacts);
     });
 
+    // DEMO, Inicializar desde el Proceso Renderizado
     ipcMain.on('data-from-web', (event, data) => {
         console.log("msg from web", data);
+    });
+
+    
+    ipcMain.on('pp-init', (event, data) => {
+        win.webContents.send('pr-chats', chats);
+        win.webContents.send('pr-contacts', contacts);
     });
 }
 
