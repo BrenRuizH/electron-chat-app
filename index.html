@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-4" id="left">
             <ul class="contact list-unstyled mb-0 mt-2">
-                <li class="p-2 card mt-2">
+                <!-- <li class="p-2 card mt-2">
                     <div class="card-body">
                         <div class="d-flex">
                             <div>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="col-8" id="right">
@@ -159,5 +159,83 @@
             </form>
         </div>
     </div>
+
+    <script>
+        var contacts = [
+            {
+                'name': 'Devon Hudson',
+                'image': 'https://randomuser.me/api/portraits/men/81.jpg',
+                'last_chat': [
+                    {
+                        'date': '07:35 PM',
+                        'message': 'Nulla cillum esse pariatur eu dolor velit consectetur.'
+                    }
+                ]
+            },
+            {
+                'name': 'Lily Reid',
+                'image': 'https://randomuser.me/api/portraits/women/56.jpg',
+                'last_chat': [
+                    {
+                        'date': '06:51 PM',
+                        'message': 'Consequat amet dolore Lorem et veniam non ullamco nostrud quis.'
+                    }
+                ]
+            },
+            {
+                'name': 'Aubrey Chambers',
+                'image': 'https://randomuser.me/api/portraits/women/95.jpg',
+                'last_chat': [
+                    {
+                        'date': '02:14 PM',
+                        'message': 'Eu amet tempor est ad nisi et quis quis tempor cillum ut eu.'
+                    }
+                ]
+            },
+            {
+                'name': 'Marjorie Morgan',
+                'image': 'https://randomuser.me/api/portraits/women/0.jpg',
+                'last_chat': [
+                    {
+                        'date': '11:08 AM',
+                        'message': 'Ut ut ullamco magna enim laborum commodo incididunt anim magna reprehenderit et tempor proident non.'
+                    }
+                ]
+            } 
+        ];
+
+        var lis = '';
+        contacts.forEach((c) => {
+            lis += `
+            <li class="p-2 card mt-2">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div>
+                                <img class="rounded-pill me-3" width="60" src=${c.image}>
+                            </div>
+                            <div>
+                                <p class="fw-bold mb-0 text-light">
+                                    ${c.name}
+                                </p>
+                                <p class="small text-muted">
+                                   ${c.last_chat[0]['message']}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="small text-muted">
+                                    ${c.last_chat[0]['date']}
+                                </p>
+                                <span class="badge bg-danger rounded-pill float-end">
+                                    5
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `
+        });
+
+        document.querySelector('.contact').innerHTML = lis;
+    </script>
 </body>
 </html>
